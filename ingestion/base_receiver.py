@@ -23,5 +23,5 @@ class BaseReceiver(ABC):
 
     @abstractmethod
     def handle_message(self, message: str):
-        """Callback for handling each received message."""
         pass
+
