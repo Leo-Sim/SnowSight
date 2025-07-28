@@ -39,7 +39,9 @@ class SocketReceiver(BaseReceiver):
             print("[INFO] Server stopped.")
 
     def handle_message(self, message: str):
-        self.redis_client.publish(RedisChannelInfo.CHANNEL_INBOUND_TCP, message)
+        logs = message.strip().split("\n")
+        for l in logs:
+            self.redis_client.publish(RedisChannelInfo.CHANNEL_INBOUND_TCP, l)
 
 
     def _start_tcp_server(self):

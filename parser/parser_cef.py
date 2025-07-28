@@ -1,8 +1,9 @@
 from .parser_base import BaseParser
+
 from pandas import DataFrame
 
 
-class LeefParser(BaseParser):
+class CefParser(BaseParser):
 
 
     def __init__(self):
