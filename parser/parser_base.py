@@ -21,7 +21,9 @@ class BaseParser(ABC):
     """
 
     def __init__(self):
-        pass
+
+        self.queue = []
+        self.batch_size = LoadInformation.BATCH_SIZE
 
     def parse_syslog_header(self, header):
         pass
@@ -34,8 +36,13 @@ class BaseParser(ABC):
 
         info: dict = self.handle_message(message)
 
-        #TODO: load parsed log to  data warehouse
-        pass
+        self.queue.append(info)
+
+        # TODO: empty queue
+        if len(self.queue) >= self.batch_size:
+
+
+            pass
 
     @abstractmethod
     def handle_message(self, message: str) -> dict:
