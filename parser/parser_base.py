@@ -1,8 +1,10 @@
 import threading
+import pandas as pd
 from abc import ABC, abstractmethod
 from pandas import DataFrame
 from message import RedisClient, RedisChannelInfo
 from loader import LoadInformation
+
 
 class ParserType:
     """
@@ -22,7 +24,7 @@ class BaseParser(ABC):
 
     def __init__(self):
 
-        self.queue = []
+        self.buffer = []
         self.batch_size = LoadInformation.BATCH_SIZE
 
     def parse_syslog_header(self, header):
@@ -36,10 +38,16 @@ class BaseParser(ABC):
 
         info: dict = self.handle_message(message)
 
-        self.queue.append(info)
+        self.buffer.append(info)
 
-        # TODO: empty queue
-        if len(self.queue) >= self.batch_size:
+        # TODO: empty buffer
+        buffer_len = len(self.buffer)
+        if buffer_len >= self.batch_size:
+
+            df = pd.DataFrame(self.buffer)
+            print(df.groupby("sip").count())
+
+
 
 
             pass

@@ -38,12 +38,5 @@ class ParserListener:
 
                         parser.load_data(data)
 
-
-
-
-
-
-
-
         thread = threading.Thread(target=listener, daemon=True)
         thread.start()

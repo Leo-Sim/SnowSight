@@ -27,6 +27,12 @@ class Config:
 
     def _get_receiver(self):
         return self.config.get("receiver")
-
+    def get_is_kafka(self):
+        return self._get_receiver()["is-kafka"]
+    def get_kafka_ip(self):
+        return self._get_receiver()["kafka-ip"]
     def get_inbound_port(self):
-        return self._get_receiver()["inbound-port"]
+        return self._get_receiver()["port"]
+
+    def get_kafka_topic(self):
+        return self._get_receiver()["topic"]
