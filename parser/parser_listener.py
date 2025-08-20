@@ -28,13 +28,11 @@ class ParserListener:
                     if isinstance(data, bytes):
                         data = data.decode('utf-8')
 
-                        parser: BaseParser = None
+                        parser = ParserFactory.get_parser(data)
 
-                        if "LEEF:2.0" in data or "LEEF:1.0" in data:
-                            parser = ParserFactory.get_parser(ParserType.LEEF)
-
-                        elif "CEF:" in data:
-                            parser = ParserFactory.get_parser(ParserType.CEF)
+                        if parser is None:
+                            print(f"[Error] Parser is None. Message: {message.value}")
+                            continue
 
                         parser.load_data(data)
 

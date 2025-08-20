@@ -14,10 +14,10 @@ class ParserFactory:
 
 
     @staticmethod
-    def get_parser(parser_type: ParserType) -> BaseParser:
-        if parser_type == ParserType.LEEF:
+    def get_parser(data) -> BaseParser:
+        if "LEEF:2.0" in data or "LEEF:1.0" in data:
             return ParserFactory._leef_parser
-        elif parser_type == ParserType.CEF:
+        elif "CEF:" in data:
             return ParserFactory._cef_parser
 
         else:

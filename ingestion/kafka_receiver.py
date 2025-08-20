@@ -2,6 +2,7 @@ from kafka import KafkaConsumer
 import json
 import threading
 
+from parser import ParserFactory
 from ingestion import BaseReceiver
 
 class KafkaReceiver(BaseReceiver):
@@ -31,11 +32,18 @@ class KafkaReceiver(BaseReceiver):
 
 
     def _listen(self):
-        print("len ",self.consumer)
+
         for message in self.consumer:
             if self.stop_event.is_set():
                 break
-            print(f"[Received] {message.value}")
+            print("message ", message.value)
+            parser = ParserFactory.get_parser(message.value)
+
+            if parser is None:
+                print(f"[Error] Parser is None. Message: {message.value}")
+                continue
+
+            parser.load_data(message.value)
 
     def stop(self):
         self.stop_event.set()
