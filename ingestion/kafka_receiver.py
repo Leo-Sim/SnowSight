@@ -36,7 +36,7 @@ class KafkaReceiver(BaseReceiver):
         for message in self.consumer:
             if self.stop_event.is_set():
                 break
-            print("message ", message.value)
+
             parser = ParserFactory.get_parser(message.value)
 
             if parser is None:

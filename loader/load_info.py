@@ -5,4 +5,6 @@ class LoadInformation:
     This class defines required information for loading data to data warehouse
     """
 
-    BATCH_SIZE = 20
+    def __init__(self, batch_size):
+
+        self.batch_size = batch_size

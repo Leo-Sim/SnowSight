@@ -13,6 +13,10 @@ class LeefParser(BaseParser):
     def __init__(self):
         super().__init__()
 
+    def parse_syslog_header(self, header: str) -> str:
+        return header.split(LeefInfo.HEADER_PREFIX)[0][:-1]
+
+
 
     def handle_message(self, message: str) -> dict:
 
@@ -21,7 +25,7 @@ class LeefParser(BaseParser):
 
         #TODO: parse syslog header
 
-        leef_index = infos[0].find("LEEF:")
+        leef_index = infos[0].find(LeefInfo.HEADER_PREFIX)
 
         # Remove delimiter
         sys_header = leef_index - 2
@@ -83,6 +87,7 @@ class LeefParser(BaseParser):
 
 class LeefInfo:
 
+    HEADER_PREFIX = "LEEF:"
     HEADER_DELIMITER = "|"
     BODY_DELIMITER = "\t"
 

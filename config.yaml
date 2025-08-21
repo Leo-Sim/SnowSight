@@ -6,3 +6,7 @@ receiver:
   kafka-ip: 3.15.202.199
   topic: log-event
 
+
+loader:
+  batch-size: 100
+

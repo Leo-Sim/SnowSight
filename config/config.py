@@ -36,3 +36,8 @@ class Config:
 
     def get_kafka_topic(self):
         return self._get_receiver()["topic"]
+
+    def _get_loader(self):
+        return self.config.get("loader")
+    def get_batch_size(self):
+        return self._get_loader()["batch_size"]

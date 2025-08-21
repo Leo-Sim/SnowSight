@@ -1,10 +1,13 @@
+
 from time import sleep
-import time
 from config import Config
 from ingestion import SocketReceiver
 from ingestion.kafka_receiver import KafkaReceiver
 from parser import ParserListener
+from loader import LoadInformation
+
 import redis
+import time
 
 config = Config()
 
@@ -12,6 +15,11 @@ inbound_port = config.get_inbound_port()
 is_kafka = config.get_is_kafka()
 kafka_ip = config.get_kafka_ip()
 kafka_topic = config.get_kafka_topic()
+
+# Config for loading data
+batch_size = config.get_batch_size()
+
+load_information = LoadInformation(batch_size)
 
 print(is_kafka)
 if is_kafka:
