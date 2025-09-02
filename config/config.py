@@ -40,4 +40,26 @@ class Config:
     def _get_loader(self):
         return self.config.get("loader")
     def get_batch_size(self):
-        return self._get_loader()["batch_size"]
+        return self._get_loader()["batch-size"]
+
+    def get_database_name(self):
+        return self._get_loader()["database-name"]
+
+    def get_schema_name(self):
+        return self._get_loader()["schema-name"]
+
+    def get_table_name(self):
+        return self._get_loader()["table-name"]
+
+    def get_common_fields(self):
+        return self._get_loader()["common-fields"]
+
+    def get_user_id(self):
+        return self._get_loader()["user-id"]
+
+    def get_password(self):
+        return self._get_loader()["password"]
+
+    def get_account(self):
+        return self._get_loader()["account"]
+

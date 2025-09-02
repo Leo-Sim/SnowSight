@@ -4,7 +4,7 @@ from config import Config
 from ingestion import SocketReceiver
 from ingestion.kafka_receiver import KafkaReceiver
 from parser import ParserListener
-from loader import LoadInformation
+from loader import LoadInformation, Loader
 
 import redis
 import time
@@ -16,15 +16,12 @@ is_kafka = config.get_is_kafka()
 kafka_ip = config.get_kafka_ip()
 kafka_topic = config.get_kafka_topic()
 
-# Config for loading data
-batch_size = config.get_batch_size()
 
-load_information = LoadInformation(batch_size)
-
-print(is_kafka)
 if is_kafka:
     receiver = KafkaReceiver(inbound_port, kafka_ip, kafka_topic)
     receiver.start()
+
+    print(f"[Info] Receiver type : Kafka")
 else:
     receiver = SocketReceiver(inbound_port)
 
@@ -32,6 +29,7 @@ else:
 
     parser_listener = ParserListener()
     parser_listener.get_message()
+    print(f"[Info] Receiver type : Socket (TCP)")
 
 
 

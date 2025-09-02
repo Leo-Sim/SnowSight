@@ -10,8 +10,8 @@ class LeefParser(BaseParser):
 
 
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, load_information):
+        super().__init__(load_information)
 
     def parse_syslog_header(self, header: str) -> str:
         return header.split(LeefInfo.HEADER_PREFIX)[0][:-1]
@@ -50,9 +50,6 @@ class LeefParser(BaseParser):
         result[LeefInfo.HEADER_EVENT_ID] = event_id
         result[LeefInfo.HEADER_PRODUCT_VERSION] = product_version
 
-
-
-
         delimiter = LeefInfo.BODY_DELIMITER
         body = ""
 
@@ -72,17 +69,6 @@ class LeefParser(BaseParser):
             result[key] = value
 
         return result
-
-
-
-
-
-
-
-
-
-
-
 
 
 class LeefInfo:

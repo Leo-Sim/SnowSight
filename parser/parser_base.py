@@ -6,7 +6,7 @@ from datetime import datetime
 from abc import ABC, abstractmethod
 from pandas import DataFrame
 from message import RedisClient, RedisChannelInfo
-from loader import LoadInformation
+from loader import LoadInformation, Loader
 
 
 class ParserType:
@@ -31,6 +31,8 @@ class BaseParser(ABC):
         self.buffer = []
         self.batch_size = self.load_information.batch_size
         self.count = 0
+
+        self.loader = Loader(load_information)
 
 
     def _parse_syslog_header_info(self, header: str) -> dict:
@@ -95,6 +97,8 @@ class BaseParser(ABC):
             # flush self.buffer
             df = pd.DataFrame(self.buffer)
             self.buffer.clear()
+
+            self.loader.load_data( df)
 
 
 

@@ -8,5 +8,17 @@ receiver:
 
 
 loader:
+
+  ## TODO : Put access information to Snowflake is not safe. Change managing security information
+  user-id: #id
+  password: #password
+  account: #account
+  ## TODO -------------------------------------------
+
   batch-size: 100
+
+  database-name: SNOWSIGHT
+  schema-name: TESTSCHEMA
+  table-name: TESTTABLE
+  common-fields: product_name, product_version, event_id
 
