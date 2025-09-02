@@ -2,7 +2,15 @@
 
 This project implements an end-to-end ETL pipeline using **Kafka**, **Pandas**, and **Snowflake**.  
 It demonstrates how data can be ingested from external sources via TCP or Kafka, transformed into Pandas DataFrames, and then loaded into Snowflake for further analysis.  
+## 🔹 Architecture
 
+```mermaid
+flowchart 
+    A[External Source] -->|TCP/Kafka| B[Receiver]
+    B --> C[Parser]
+    C --> D[Pandas DataFrame]
+    D -->|write_pandas| E[Snowflake]
+```
 
 ## 🔹 Configuration
 
